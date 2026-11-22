@@ -1,0 +1,13 @@
+# environment
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# datasets: ETL9B licence forbids redistribution; KanjiVG is re-downloadable
+data/etl9b/
+data/kanji/
+data/kanjivg-*.zip
+
+# large regenerable outputs (scripts/predict_test.py)
+results/*/test_predictions.npz
