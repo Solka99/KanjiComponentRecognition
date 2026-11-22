@@ -1,0 +1,29 @@
+{
+ "heldout_characters": 300,
+ "components_within_heldout": {
+  "top1": 0.6736806947227789,
+  "top5": 0.8842685370741483,
+  "images": 5988
+ },
+ "components_within_all": {
+  "top1": 0.27955911823647295,
+  "top5": 0.44472277889111556,
+  "images": 5988
+ },
+ "character_head_on_heldout": {
+  "top1": 0.0,
+  "top5": 0.0,
+  "images": 5988
+ },
+ "components_within_all_on_seen": {
+  "top1": 0.8152735909381565,
+  "top5": 0.93738923906093,
+  "images": 54735
+ },
+ "character_head_on_seen": {
+  "top1": 0.9932401571206724,
+  "top5": 0.9994701744770257,
+  "images": 54735
+ },
+ "chance_within_heldout_top1": 0.0033333333333333335
+}

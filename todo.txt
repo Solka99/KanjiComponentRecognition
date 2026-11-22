@@ -1,0 +1,2 @@
+Include components seen< 5 && >1 times
+i think that the components in different positions shouldn't be cut off if they have fewer examples in this position, but that'll be a fix for later

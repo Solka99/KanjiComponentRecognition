@@ -1,0 +1,145 @@
+{
+ "name": "heldout_multitask",
+ "arguments": {
+  "name": "heldout_multitask",
+  "samples_per_class": null,
+  "components": [
+   "nested",
+   "positioned"
+  ],
+  "component_weight": 1.0,
+  "epochs": 8,
+  "batch_size": 256,
+  "learning_rate": 0.002,
+  "width": 16,
+  "threads": 6,
+  "seed": 0,
+  "validation_subset": 15000,
+  "results_dir": "results",
+  "exclude_characters": "data/heldout_characters.txt"
+ },
+ "train_samples": 437827,
+ "best_validation_subset_top1": 0.9932666666666666,
+ "validation": {
+  "top1": 0.9928438083385189,
+  "top5": 0.9992130019400417,
+  "nested_f1_micro": 0.5677573084831238,
+  "nested_f1_macro": 0.7081562280654907,
+  "positioned_f1_micro": 0.7701325416564941,
+  "positioned_f1_macro": 0.803356409072876
+ },
+ "test": {
+  "top1": 0.9932401571206724,
+  "top5": 0.9994701744770257,
+  "nested_f1_micro": 0.5709211230278015,
+  "nested_f1_macro": 0.7105487585067749,
+  "positioned_f1_micro": 0.7691341042518616,
+  "positioned_f1_macro": 0.8044107556343079
+ },
+ "history": [
+  {
+   "epoch": 1,
+   "seconds": 238,
+   "train_loss_character": 4.8252,
+   "train_loss_nested": 0.3759,
+   "train_loss_positioned": 0.2213,
+   "validation_top1": 0.8852,
+   "validation_top5": 0.9885,
+   "validation_nested_f1_micro": 0.361,
+   "validation_nested_f1_macro": 0.3995,
+   "validation_positioned_f1_micro": 0.4514,
+   "validation_positioned_f1_macro": 0.4654
+  },
+  {
+   "epoch": 2,
+   "seconds": 282,
+   "train_loss_character": 0.2971,
+   "train_loss_nested": 0.182,
+   "train_loss_positioned": 0.0521,
+   "validation_top1": 0.9659,
+   "validation_top5": 0.9977,
+   "validation_nested_f1_micro": 0.444,
+   "validation_nested_f1_macro": 0.5581,
+   "validation_positioned_f1_micro": 0.614,
+   "validation_positioned_f1_macro": 0.6564
+  },
+  {
+   "epoch": 3,
+   "seconds": 273,
+   "train_loss_character": 0.1517,
+   "train_loss_nested": 0.1563,
+   "train_loss_positioned": 0.0399,
+   "validation_top1": 0.9814,
+   "validation_top5": 0.9985,
+   "validation_nested_f1_micro": 0.4624,
+   "validation_nested_f1_macro": 0.5872,
+   "validation_positioned_f1_micro": 0.6563,
+   "validation_positioned_f1_macro": 0.7006
+  },
+  {
+   "epoch": 4,
+   "seconds": 217,
+   "train_loss_character": 0.1058,
+   "train_loss_nested": 0.141,
+   "train_loss_positioned": 0.034,
+   "validation_top1": 0.9848,
+   "validation_top5": 0.9988,
+   "validation_nested_f1_micro": 0.5053,
+   "validation_nested_f1_macro": 0.6402,
+   "validation_positioned_f1_micro": 0.7077,
+   "validation_positioned_f1_macro": 0.7393
+  },
+  {
+   "epoch": 5,
+   "seconds": 215,
+   "train_loss_character": 0.0745,
+   "train_loss_nested": 0.1289,
+   "train_loss_positioned": 0.0297,
+   "validation_top1": 0.9891,
+   "validation_top5": 0.9991,
+   "validation_nested_f1_micro": 0.5413,
+   "validation_nested_f1_macro": 0.6663,
+   "validation_positioned_f1_micro": 0.7294,
+   "validation_positioned_f1_macro": 0.764
+  },
+  {
+   "epoch": 6,
+   "seconds": 231,
+   "train_loss_character": 0.0533,
+   "train_loss_nested": 0.1197,
+   "train_loss_positioned": 0.0265,
+   "validation_top1": 0.991,
+   "validation_top5": 0.9991,
+   "validation_nested_f1_micro": 0.5511,
+   "validation_nested_f1_macro": 0.6885,
+   "validation_positioned_f1_micro": 0.759,
+   "validation_positioned_f1_macro": 0.7923
+  },
+  {
+   "epoch": 7,
+   "seconds": 203,
+   "train_loss_character": 0.041,
+   "train_loss_nested": 0.1133,
+   "train_loss_positioned": 0.0245,
+   "validation_top1": 0.9932,
+   "validation_top5": 0.9991,
+   "validation_nested_f1_micro": 0.5622,
+   "validation_nested_f1_macro": 0.7015,
+   "validation_positioned_f1_micro": 0.7666,
+   "validation_positioned_f1_macro": 0.7995
+  },
+  {
+   "epoch": 8,
+   "seconds": 229,
+   "train_loss_character": 0.0349,
+   "train_loss_nested": 0.1107,
+   "train_loss_positioned": 0.0236,
+   "validation_top1": 0.9933,
+   "validation_top5": 0.9992,
+   "validation_nested_f1_micro": 0.5669,
+   "validation_nested_f1_macro": 0.7084,
+   "validation_positioned_f1_micro": 0.771,
+   "validation_positioned_f1_macro": 0.8052
+  }
+ ]
+}

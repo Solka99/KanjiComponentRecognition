@@ -1,0 +1,76 @@
+excluding 300 characters
+train 437827  validation 54638  test 54735
+model 0.62M parameters, heads {'character': 3036, 'nested': 382, 'positioned': 251}, 1710 steps/epoch
+  epoch 1 step 200/1710 loss 8.976 1975 img/s
+  epoch 1 step 400/1710 loss 8.454 2002 img/s
+  epoch 1 step 600/1710 loss 7.724 1797 img/s
+  epoch 1 step 800/1710 loss 6.458 1731 img/s
+  epoch 1 step 1000/1710 loss 4.741 1690 img/s
+  epoch 1 step 1200/1710 loss 2.577 1757 img/s
+  epoch 1 step 1400/1710 loss 1.571 1797 img/s
+  epoch 1 step 1600/1710 loss 1.081 1834 img/s
+{"epoch": 1, "seconds": 238, "train_loss_character": 4.8252, "train_loss_nested": 0.3759, "train_loss_positioned": 0.2213, "validation_top1": 0.8852, "validation_top5": 0.9885, "validation_nested_f1_micro": 0.361, "validation_nested_f1_macro": 0.3995, "validation_positioned_f1_micro": 0.4514, "validation_positioned_f1_macro": 0.4654}
+  epoch 2 step 200/1710 loss 0.697 2119 img/s
+  epoch 2 step 400/1710 loss 0.521 1957 img/s
+  epoch 2 step 600/1710 loss 0.598 1961 img/s
+  epoch 2 step 800/1710 loss 0.500 1944 img/s
+  epoch 2 step 1000/1710 loss 0.469 1805 img/s
+  epoch 2 step 1200/1710 loss 0.409 1729 img/s
+  epoch 2 step 1400/1710 loss 0.528 1685 img/s
+  epoch 2 step 1600/1710 loss 0.381 1640 img/s
+{"epoch": 2, "seconds": 282, "train_loss_character": 0.2971, "train_loss_nested": 0.182, "train_loss_positioned": 0.0521, "validation_top1": 0.9659, "validation_top5": 0.9977, "validation_nested_f1_micro": 0.444, "validation_nested_f1_macro": 0.5581, "validation_positioned_f1_micro": 0.614, "validation_positioned_f1_macro": 0.6564}
+  epoch 3 step 200/1710 loss 0.395 1188 img/s
+  epoch 3 step 400/1710 loss 0.376 1139 img/s
+  epoch 3 step 600/1710 loss 0.315 1138 img/s
+  epoch 3 step 800/1710 loss 0.351 1272 img/s
+  epoch 3 step 1000/1710 loss 0.327 1386 img/s
+  epoch 3 step 1200/1710 loss 0.336 1440 img/s
+  epoch 3 step 1400/1710 loss 0.384 1515 img/s
+  epoch 3 step 1600/1710 loss 0.355 1584 img/s
+{"epoch": 3, "seconds": 273, "train_loss_character": 0.1517, "train_loss_nested": 0.1563, "train_loss_positioned": 0.0399, "validation_top1": 0.9814, "validation_top5": 0.9985, "validation_nested_f1_micro": 0.4624, "validation_nested_f1_macro": 0.5872, "validation_positioned_f1_micro": 0.6563, "validation_positioned_f1_macro": 0.7006}
+  epoch 4 step 200/1710 loss 0.310 2234 img/s
+  epoch 4 step 400/1710 loss 0.307 2256 img/s
+  epoch 4 step 600/1710 loss 0.409 2255 img/s
+  epoch 4 step 800/1710 loss 0.315 2263 img/s
+  epoch 4 step 1000/1710 loss 0.235 2269 img/s
+  epoch 4 step 1200/1710 loss 0.286 2180 img/s
+  epoch 4 step 1400/1710 loss 0.263 2115 img/s
+  epoch 4 step 1600/1710 loss 0.287 2061 img/s
+{"epoch": 4, "seconds": 217, "train_loss_character": 0.1058, "train_loss_nested": 0.141, "train_loss_positioned": 0.034, "validation_top1": 0.9848, "validation_top5": 0.9988, "validation_nested_f1_micro": 0.5053, "validation_nested_f1_macro": 0.6402, "validation_positioned_f1_micro": 0.7077, "validation_positioned_f1_macro": 0.7393}
+  epoch 5 step 200/1710 loss 0.214 1724 img/s
+  epoch 5 step 400/1710 loss 0.184 1934 img/s
+  epoch 5 step 600/1710 loss 0.262 1963 img/s
+  epoch 5 step 800/1710 loss 0.230 1951 img/s
+  epoch 5 step 1000/1710 loss 0.224 1952 img/s
+  epoch 5 step 1200/1710 loss 0.246 1993 img/s
+  epoch 5 step 1400/1710 loss 0.220 2025 img/s
+  epoch 5 step 1600/1710 loss 0.240 2052 img/s
+{"epoch": 5, "seconds": 215, "train_loss_character": 0.0745, "train_loss_nested": 0.1289, "train_loss_positioned": 0.0297, "validation_top1": 0.9891, "validation_top5": 0.9991, "validation_nested_f1_micro": 0.5413, "validation_nested_f1_macro": 0.6663, "validation_positioned_f1_micro": 0.7294, "validation_positioned_f1_macro": 0.764}
+  epoch 6 step 200/1710 loss 0.193 2161 img/s
+  epoch 6 step 400/1710 loss 0.217 2144 img/s
+  epoch 6 step 600/1710 loss 0.265 2168 img/s
+  epoch 6 step 800/1710 loss 0.309 2138 img/s
+  epoch 6 step 1000/1710 loss 0.206 2038 img/s
+  epoch 6 step 1200/1710 loss 0.192 1998 img/s
+  epoch 6 step 1400/1710 loss 0.202 1949 img/s
+  epoch 6 step 1600/1710 loss 0.209 1927 img/s
+{"epoch": 6, "seconds": 231, "train_loss_character": 0.0533, "train_loss_nested": 0.1197, "train_loss_positioned": 0.0265, "validation_top1": 0.991, "validation_top5": 0.9991, "validation_nested_f1_micro": 0.5511, "validation_nested_f1_macro": 0.6885, "validation_positioned_f1_micro": 0.759, "validation_positioned_f1_macro": 0.7923}
+  epoch 7 step 200/1710 loss 0.226 2171 img/s
+  epoch 7 step 400/1710 loss 0.175 2175 img/s
+  epoch 7 step 600/1710 loss 0.153 2178 img/s
+  epoch 7 step 800/1710 loss 0.160 2184 img/s
+  epoch 7 step 1000/1710 loss 0.147 2203 img/s
+  epoch 7 step 1200/1710 loss 0.145 2203 img/s
+  epoch 7 step 1400/1710 loss 0.178 2190 img/s
+  epoch 7 step 1600/1710 loss 0.193 2175 img/s
+{"epoch": 7, "seconds": 203, "train_loss_character": 0.041, "train_loss_nested": 0.1133, "train_loss_positioned": 0.0245, "validation_top1": 0.9932, "validation_top5": 0.9991, "validation_nested_f1_micro": 0.5622, "validation_nested_f1_macro": 0.7015, "validation_positioned_f1_micro": 0.7666, "validation_positioned_f1_macro": 0.7995}
+  epoch 8 step 200/1710 loss 0.197 2222 img/s
+  epoch 8 step 400/1710 loss 0.156 2229 img/s
+  epoch 8 step 600/1710 loss 0.186 2243 img/s
+  epoch 8 step 800/1710 loss 0.156 2171 img/s
+  epoch 8 step 1000/1710 loss 0.166 2054 img/s
+  epoch 8 step 1200/1710 loss 0.154 1993 img/s
+  epoch 8 step 1400/1710 loss 0.154 1954 img/s
+  epoch 8 step 1600/1710 loss 0.176 1921 img/s
+{"epoch": 8, "seconds": 229, "train_loss_character": 0.0349, "train_loss_nested": 0.1107, "train_loss_positioned": 0.0236, "validation_top1": 0.9933, "validation_top5": 0.9992, "validation_nested_f1_micro": 0.5669, "validation_nested_f1_macro": 0.7084, "validation_positioned_f1_micro": 0.771, "validation_positioned_f1_macro": 0.8052}
+TEST {"top1": 0.9932401571206724, "top5": 0.9994701744770257, "nested_f1_micro": 0.5709211230278015, "nested_f1_macro": 0.7105487585067749, "positioned_f1_micro": 0.7691341042518616, "positioned_f1_macro": 0.8044107556343079}
