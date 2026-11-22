@@ -6,22 +6,35 @@ vector (nested + positioned) under the predicted component probabilities, as in 
 The weight is chosen on the validation split; the test split is scored once with that weight.
 
 Needs results/<run>/{validation,test}_predictions.npz (scripts/predict_test.py --split ...).
-Writes results/rerank.json and results/rerank_changes.csv.
+Writes rerank.json, rerank_changes.csv and provenance.json into --output-dir.
 """
+import argparse
 import json
+import sys
 from math import comb
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+sys.path.insert(0, "src")
+from kanji_components.provenance import write_provenance
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--source-dir", default="results/E01_baseline_vs_components", help="folder with the runs")
+parser.add_argument("--output-dir", default="results/E03_rerank")
+parser.add_argument("--targets", default="data/component_targets_df5.npz")
+arguments = parser.parse_args()
+
 RUNS = {5: "multitask_5", 20: "multitask_20", 200: "multitask_all"}
 WEIGHTS = [0.0, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0]
 PROBABILITY_FLOOR = 1e-4
 CHUNK = 10000
-RESULTS_DIR = Path("results")
+SOURCE_DIR = Path(arguments.source_dir)
+OUTPUT_DIR = Path(arguments.output_dir)
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-archive = np.load("data/component_targets.npz", allow_pickle=False)
+archive = np.load(arguments.targets, allow_pickle=False)
 characters = list(archive["characters"])
 component_targets = np.concatenate([archive["nested_targets"], archive["positioned_targets"]], axis=1)
 component_targets = component_targets.astype(np.float32)
@@ -56,8 +69,8 @@ def exact_mcnemar_p_value(fixed, broken):
 
 results, change_rows = [], []
 for samples_per_class, run in RUNS.items():
-    validation = np.load(RESULTS_DIR / run / "validation_predictions.npz")
-    test = np.load(RESULTS_DIR / run / "test_predictions.npz")
+    validation = np.load(SOURCE_DIR / run / "validation_predictions.npz")
+    test = np.load(SOURCE_DIR / run / "test_predictions.npz")
     validation_scores = candidate_component_scores(validation)
     validation_labels = validation["labels"].astype(np.int64)
     validation_accuracy = {weight: float((reranked_top1(validation, validation_scores, weight) == validation_labels).mean())
@@ -87,6 +100,8 @@ for samples_per_class, run in RUNS.items():
                             else "broken" if before[row] == test_labels[row] else "still wrong"})
     print(json.dumps({key: value for key, value in results[-1].items() if key != "validation_top1_by_weight"}))
 
-(RESULTS_DIR / "rerank.json").write_text(json.dumps(results, indent=1))
-pd.DataFrame(change_rows).to_csv(RESULTS_DIR / "rerank_changes.csv", index=False)
-print(f"saved results/rerank.json and results/rerank_changes.csv ({len(change_rows)} changed answers)")
+(OUTPUT_DIR / "rerank.json").write_text(json.dumps(results, indent=1))
+pd.DataFrame(change_rows).to_csv(OUTPUT_DIR / "rerank_changes.csv", index=False)
+prediction_files = [SOURCE_DIR / run / f"{split}_predictions.npz" for run in RUNS.values() for split in ("validation", "test")]
+write_provenance(OUTPUT_DIR, [arguments.targets] + prediction_files)
+print(f"saved {OUTPUT_DIR}/rerank.json and rerank_changes.csv ({len(change_rows)} changed answers)")

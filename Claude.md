@@ -14,3 +14,8 @@
 - **No Trailing Empty Cells:** Before finishing, remove any empty cells at the end of the notebook.
 - **Row counts:** print the row count before and after every filter, dedup and join that drops rows, and give n next to every share.
 - **Hypotheses are not facts:** Any claim no output in the notebook supports is a hypothesis. This includes explanations of why the data looks the way it does and predictions of what a different filter, threshold or method would show. Label it "Hypothesis:" and avoid words like "almost certainly" or "clearly". If you filter or remove data based on a hypothesis, say so in the ⚠️ flag.
+
+### Experiments
+- Every experiment variant gets its own folder `results/E##_<short_name>/` with a README (question, what changed, how to rerun, results, conclusion) and a row in `EXPERIMENTS.md`. Never overwrite an earlier experiment's folder or label file.
+- New labels go into a new `data/component_targets_<rule>.npz`; new model or loss variants become options of `scripts/train.py` whose defaults reproduce earlier experiments.
+- Never commit, push, branch or tag; the user decides what is committed and when.

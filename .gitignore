@@ -10,4 +10,4 @@ data/kanji/
 data/kanjivg-*.zip
 
 # large regenerable outputs (scripts/predict_test.py)
-results/*/test_predictions.npz
+results/**/*_predictions.npz

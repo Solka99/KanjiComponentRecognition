@@ -1,8 +1,9 @@
 """Train the character classifier with or without component heads.
 
-Examples:
-  python scripts/train.py --name baseline_200 --samples-per-class 200
-  python scripts/train.py --name multitask_20 --samples-per-class 20 --components nested positioned
+Every run belongs to an experiment folder under results/ (see EXPERIMENTS.md). Examples:
+  python scripts/train.py --results-dir results/E01_baseline_vs_components --name baseline_5 --samples-per-class 5
+  python scripts/train.py --results-dir results/E01_baseline_vs_components --name multitask_20 \
+      --samples-per-class 20 --components nested positioned
 """
 import argparse
 import json
@@ -17,6 +18,7 @@ from torch.utils.data import DataLoader
 sys.path.insert(0, "src")
 from kanji_components.etl9b import Etl9bCache
 from kanji_components.model import KanjiNet, count_parameters
+from kanji_components.provenance import provenance
 from kanji_components.training import GlyphDataset, MultiTaskLoss, evaluate
 
 parser = argparse.ArgumentParser()
@@ -32,7 +34,8 @@ parser.add_argument("--threads", type=int, default=6)
 parser.add_argument("--seed", type=int, default=0)
 parser.add_argument("--validation-subset", type=int, default=15000,
                     help="validation samples scored after each epoch; full validation and test run at the end")
-parser.add_argument("--results-dir", default="results")
+parser.add_argument("--results-dir", required=True, help="experiment folder, e.g. results/E04_...")
+parser.add_argument("--targets", default="data/component_targets_df5.npz", help="component label file")
 parser.add_argument("--exclude-characters", default=None,
                     help="text file of characters removed from train, validation and test (zero-shot experiment)")
 arguments = parser.parse_args()
@@ -43,7 +46,7 @@ run_dir = Path(arguments.results_dir) / arguments.name
 run_dir.mkdir(parents=True, exist_ok=True)
 
 cache = Etl9bCache()
-targets_archive = np.load("data/component_targets.npz", allow_pickle=False)
+targets_archive = np.load(arguments.targets, allow_pickle=False)
 assert list(targets_archive["characters"]) == cache.characters
 component_targets = {name: targets_archive[f"{name}_targets"] for name in arguments.components}
 
@@ -117,7 +120,8 @@ full_validation_metrics = evaluate(model, full_validation_loader, component_targ
 test_metrics = evaluate(model, test_loader, component_targets)
 summary = {"name": arguments.name, "arguments": vars(arguments), "train_samples": len(train_indices),
            "best_validation_subset_top1": best_validation_top1, "validation": full_validation_metrics,
-           "test": test_metrics, "history": history}
+           "test": test_metrics, "history": history,
+           "provenance": provenance([arguments.targets] + ([arguments.exclude_characters] if arguments.exclude_characters else []))}
 (run_dir / "summary.json").write_text(json.dumps(summary, indent=1, ensure_ascii=False))
 torch.save({"state_dict": best_state, "head_sizes": head_sizes, "width": arguments.width,
             "characters": cache.characters}, run_dir / "model.pt")

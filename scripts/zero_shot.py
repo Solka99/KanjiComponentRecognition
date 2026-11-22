@@ -2,26 +2,32 @@
 
 Each candidate character is scored by the Bernoulli log-likelihood of its KanjiVG component
 target vector under the component probabilities the model predicted for the image; the best
-scoring candidate is the prediction. Needs results/<name>/test_predictions.npz.
+scoring candidate is the prediction. Needs <results-dir>/<name>/test_predictions.npz.
 
-Writes results/<name>/zero_shot.json and results/<name>/zero_shot_predictions.csv.
+Writes zero_shot.json, zero_shot_predictions.csv and provenance.json into <results-dir>/<name>.
 """
 import argparse
 import json
 from pathlib import Path
 
+import sys
+
 import numpy as np
 import pandas as pd
+
+sys.path.insert(0, "src")
+from kanji_components.provenance import write_provenance
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", default="heldout_multitask")
 parser.add_argument("--heldout", default="data/heldout_characters.txt")
-parser.add_argument("--results-dir", default="results")
+parser.add_argument("--results-dir", default="results/E02_zero_shot")
+parser.add_argument("--targets", default="data/component_targets_df5.npz")
 arguments = parser.parse_args()
 run_dir = Path(arguments.results_dir) / arguments.name
 
 predictions = np.load(run_dir / "test_predictions.npz")
-archive = np.load("data/component_targets.npz", allow_pickle=False)
+archive = np.load(arguments.targets, allow_pickle=False)
 characters = list(archive["characters"])
 heldout_characters = Path(arguments.heldout).read_text().strip()
 heldout_labels = np.array(sorted(characters.index(character) for character in heldout_characters))
@@ -68,6 +74,7 @@ results = {
     "chance_within_heldout_top1": 1 / len(heldout_labels),
 }
 (run_dir / "zero_shot.json").write_text(json.dumps(results, indent=1))
+write_provenance(run_dir, [arguments.targets, arguments.heldout])
 
 heldout_candidates = np.where(is_heldout_class[None, :], scores, -np.inf)
 table = pd.DataFrame({

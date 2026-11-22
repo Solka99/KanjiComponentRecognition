@@ -10,7 +10,7 @@ HELDOUT_COUNT = 300
 MIN_REMAINING = 3
 SEED = 0
 
-archive = np.load("data/component_targets.npz", allow_pickle=False)
+archive = np.load("data/component_targets_df5.npz", allow_pickle=False)
 characters = list(archive["characters"])
 combined = np.concatenate([archive["nested_targets"], archive["positioned_targets"]], axis=1) > 0.5
 positioned_count = archive["positioned_targets"].sum(1)

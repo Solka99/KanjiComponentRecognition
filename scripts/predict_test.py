@@ -4,7 +4,7 @@ Writes results/<name>/<split>_predictions.npz with the true labels, the top-5 pr
 softmax probabilities, the probability of the true class and, for every component head, the
 sigmoid probabilities (float16).
 
-Example: python scripts/predict_test.py --name multitask_all
+Example: python scripts/predict_test.py --results-dir results/E01_baseline_vs_components --name multitask_all
 """
 import argparse
 import sys
@@ -23,7 +23,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--name", required=True)
 parser.add_argument("--split", default="test", choices=["validation", "test"])
 parser.add_argument("--threads", type=int, default=4)
-parser.add_argument("--results-dir", default="results")
+parser.add_argument("--results-dir", required=True, help="experiment folder holding the run")
 arguments = parser.parse_args()
 torch.set_num_threads(arguments.threads)
 
