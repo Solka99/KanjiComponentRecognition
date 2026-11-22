@@ -1,6 +1,6 @@
-"""Run a trained model over the whole test split and save predictions for analysis.
+"""Run a trained model over a whole split (test by default) and save predictions for analysis.
 
-Writes results/<name>/test_predictions.npz with the true labels, the top-5 predicted labels, their
+Writes results/<name>/<split>_predictions.npz with the true labels, the top-5 predicted labels, their
 softmax probabilities, the probability of the true class and, for every component head, the
 sigmoid probabilities (float16).
 
@@ -21,6 +21,7 @@ from kanji_components.training import GlyphDataset
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", required=True)
+parser.add_argument("--split", default="test", choices=["validation", "test"])
 parser.add_argument("--threads", type=int, default=4)
 parser.add_argument("--results-dir", default="results")
 arguments = parser.parse_args()
@@ -34,7 +35,7 @@ model.eval()
 
 cache = Etl9bCache()
 assert cache.characters == checkpoint["characters"]
-test_indices = cache.indices("test")
+test_indices = cache.indices(arguments.split)
 loader = DataLoader(GlyphDataset(cache.images, cache.labels, test_indices, augment=False), batch_size=512)
 
 component_names = [name for name in checkpoint["head_sizes"] if name != "character"]
@@ -55,6 +56,6 @@ predictions = {"indices": test_indices, "labels": cache.labels[test_indices], "t
                "top5_probabilities": np.concatenate(top5_probability_batches),
                "true_probability": np.concatenate(true_probability_batches)}
 predictions.update({f"{name}_probabilities": np.concatenate(batches) for name, batches in probability_batches.items()})
-np.savez_compressed(run_dir / "test_predictions.npz", **predictions)
+np.savez_compressed(run_dir / f"{arguments.split}_predictions.npz", **predictions)
 top1 = (predictions["top5"][:, 0] == predictions["labels"]).mean()
-print(f"{arguments.name}: {len(test_indices)} test images, top1 {top1:.4f}")
+print(f"{arguments.name}: {len(test_indices)} {arguments.split} images, top1 {top1:.4f}")
